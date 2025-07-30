@@ -1,4 +1,4 @@
-# Uebrsat - SAT Solver / Model Counter in Rust
+# Ubersat - SAT Solver / Model Counter in Rust
 
 ## Overview
 
