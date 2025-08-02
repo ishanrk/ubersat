@@ -14,7 +14,7 @@ Uebrsat is a fast and efficient SAT (Boolean Satisfiability Problem) solver impl
 
 ## Industrial Applications
 
-SAT solvers like Uebrsat play a critical role in many industries by enabling automated reasoning and decision-making:
+SAT solvers like Ubersat play a critical role in many industries by enabling automated reasoning and decision-making:
 
 - **Hardware and Software Verification:** Ensuring circuits and programs behave correctly by encoding properties as SAT problems.
 - **Automated Planning and Scheduling:** Solving complex planning tasks in logistics, manufacturing, and AI.
