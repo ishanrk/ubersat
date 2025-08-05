@@ -14,10 +14,24 @@ enum class Assignment
 };
 
 
+// WILL HOLD INFORMATION ABOUT THE VARIABLE ITSELF IN THE CLAUSE AND THE LITERAL
 struct Variable
 {
-    Assignment polarity;
-    int var_index;
+    Assignment literal_assignment;
+    int varIndex;
+    bool polarity;
+
+    // CONSTRUCTOR
+
+    Variable(int var_index, bool polarity): varIndex(varIndex), polarity(polarity)
+    {
+        literal_assignment = Assignment::Unassigned;
+    }
+
+    bool operator==(const Variable& other) const {
+        return varIndex == other.varIndex && polarity == other.polarity;
+    }
+
 
 };
 
