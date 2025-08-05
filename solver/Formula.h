@@ -7,14 +7,24 @@
 #include "Clause.h"
 #include <vector>
 #include <stack>
+#include <iostream>
 
-class Formula
+struct Formula
 {
+public:
     int numClauses = 0;
-    std::map<int, std::pair<std::vector<int,int>,std::vector<int,int>>> watchedList;
+    int numVars = 0;
+    std::map<int, std::pair<std::vector<int>,std::vector<int>>> watchedList;
     std::stack<std::tuple<int,int,bool>> decisionTrail;
     std::vector<Clause> clauseList;
 
+    Formula(int vars, int clauses):numVars(vars), numClauses(clauses){}
+
+    void addClause(Clause currClause);
+
+    void make_decision();
+
+    void unit_propagate();
 
 };
 

@@ -13,18 +13,17 @@
 struct Clause
 {
     std::deque<Variable> literals;
-    std::map<int, bool> literalContainer;
+    std::map<int, int> literalContainer;
     std::optional<Variable> watchedFirst;
     std::optional<Variable> watchedSecond;
     int clauseLength=0;
     int clauseId;
     int clauseActivity = true;
 
-    Clause(int clause_id): clauseId(clause_id){}
 
     [[nodiscard]] bool checkVariableInClause(int varIndex) const;
 
-    void addVariable(Variable newLiteral);
+    bool addVariable(Variable newLiteral);
 };
 
 

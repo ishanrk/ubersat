@@ -16,39 +16,69 @@ bool Clause::checkVariableInClause(int var_index) const
     }
 }
 
-void Clause::addVariable(Variable new_literal)
+bool Clause::addVariable(Variable new_literal)
 {
+    if(checkVariableInClause(new_literal.varIndex))
+    {
+        // INDICATES TWO LITERALS OF SAME VAR WITH DIFFERING POLARITY, CLAUSE TRIVIALLY TRUE
+        if(literalContainer[new_literal.varIndex]*new_literal.varIndex<0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
+    }
     if(!watchedFirst.has_value())
     {
         watchedFirst=new_literal;
         clauseLength++;
-        literalContainer[watchedFirst->varIndex]=true;
-        literals.push_back(new_literal);
-        return;
-    }
-    else if(!watchedSecond.has_value())
-    {
-        if(!checkVariableInClause(new_literal.varIndex))
+        if(watchedFirst->polarity)
         {
-            watchedSecond=new_literal;
-            clauseLength++;
-            literalContainer[watchedSecond->varIndex]=true;
-            literals.push_back(new_literal);
-            return;
+            literalContainer[watchedFirst->varIndex]=1;
         }
         else
         {
-            return;
+            literalContainer[watchedFirst->varIndex]=-1;
         }
+
+        literals.push_back(new_literal);
+        return true;
+    }
+    else if(!watchedSecond.has_value())
+    {
+
+            watchedSecond=new_literal;
+            clauseLength++;
+            if(watchedSecond->polarity)
+            {
+                literalContainer[watchedSecond->varIndex]=1;
+            }
+            else
+            {
+                literalContainer[watchedSecond->varIndex]=-1;
+            }
+            literals.push_back(new_literal);
+            return true;
+
     }
     else
     {
         if(!checkVariableInClause(new_literal.varIndex))
         {
             clauseLength++;
-            literalContainer[new_literal.varIndex]=true;
+            if(new_literal.polarity)
+            {
+                literalContainer[new_literal.varIndex]=1;
+            }
+            else
+            {
+                literalContainer[new_literal.varIndex]=-1;
+            }
             literals.push_back(new_literal);
-            return;
+            return true;
 
         }
     }
