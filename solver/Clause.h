@@ -17,13 +17,15 @@ struct Clause
     std::optional<Variable> watchedFirst;
     std::optional<Variable> watchedSecond;
     int clauseLength=0;
-    int clauseId;
+    int clauseId=-1;
     int clauseActivity = true;
 
 
     [[nodiscard]] bool checkVariableInClause(int varIndex) const;
 
     bool addVariable(Variable newLiteral);
+
+    void debugPrint();
 };
 
 

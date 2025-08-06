@@ -4,6 +4,7 @@
 
 #ifndef UBERSAT_VARIABLE_H
 #define UBERSAT_VARIABLE_H
+#include <iostream>
 
 // ASSIGNMENT ENUMS FOR LITERALS
 enum class Assignment
@@ -23,7 +24,7 @@ struct Variable
 
     // CONSTRUCTOR
 
-    Variable(int var_index, bool polarity): varIndex(varIndex), polarity(polarity)
+    Variable(int var_index, bool polarity): varIndex(var_index), polarity(polarity)
     {
         literal_assignment = Assignment::Unassigned;
     }

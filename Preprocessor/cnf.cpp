@@ -1,16 +1,9 @@
 //
 // Created by kumth on 8/4/2025.
 //
+#include "cnf.h"
 
-#include "../solver/formula.h"
-#include <string>
-#include <fstream>
-#include <sstream>
 
-struct CNFHeader {
-    int numVars = 0;
-    int numClauses = 0;
-};
 
 CNFHeader parseCNFHeader(const std::string& filepath) {
     std::ifstream file(filepath);
@@ -71,28 +64,35 @@ Formula parseCNFClauses(const std::string& filepath) {
             if(literal<0)
             {
                 Variable currVar(-literal,false);
-                if(!currClause.addVariable(currVar))
+                bool ans = currClause.addVariable(currVar);
+                if(!ans)
                 {
-                    std::cout<<"TRIBIAL CLAUSE DETECTED" << std::endl;
+                    std::cout<<"TRIVIAL CLAUSE DETECTED" << std::endl;
                     flag_trivial= true;
                 };
             }
             else
             {
-                Variable currVar(-literal,true);
-                if(!currClause.addVariable(currVar))
+
+                Variable currVar(literal,true);
+
+                bool ans = currClause.addVariable(currVar);
+                if(!ans)
                 {
-                    std::cout<<"TRIBIAL CLAUSE DETECTED" << std::endl;
+                    std::cout<<"TRIVIAL CLAUSE DETECTED" << std::endl;
                     flag_trivial= true;
                 };
             }
         }
         if(!flag_trivial)
         {
+            std::cout << "SUCCESSFULLY ADDED CLAUSE" << std::endl;
             currFormula.addClause(currClause);
+            currClause.debugPrint();
         }
 
     }
-
     file.close();
+    return currFormula;
+
 }

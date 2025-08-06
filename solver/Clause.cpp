@@ -33,6 +33,7 @@ bool Clause::addVariable(Variable new_literal)
     }
     if(!watchedFirst.has_value())
     {
+
         watchedFirst=new_literal;
         clauseLength++;
         if(watchedFirst->polarity)
@@ -82,5 +83,15 @@ bool Clause::addVariable(Variable new_literal)
 
         }
     }
+    return  false;
+}
 
+void Clause::debugPrint()
+{
+    std::cout << "Clause ID: " << clauseId << "\n";
+    std::cout << "Literals: ";
+    for (const auto& literal : literals) {
+        std::cout << (literal.polarity ? "" : "-") << literal.varIndex << " ";
+    }
+    std::cout << "\n";
 }
