@@ -36,4 +36,14 @@ void Formula::addClause(Clause currClause)
             watchedList[currClause.watchedSecond->varIndex].second.push_back(currClause.clauseId);
         }
     }
+
+    if(currClause.literals.size()==1)
+    {
+        unitQueue.push(currClause.literals.front().varIndex); // PUSH ALL UNITS IN THE QUEUE
+    }
+}
+
+std::tuple<bool,int,int> Formula::unitPropagate()
+{
+
 }

@@ -18,7 +18,7 @@ public:
     std::map<int, std::pair<std::vector<int>,std::vector<int>>> watchedList;
     std::stack<std::tuple<int,int,bool>> decisionTrail;
     std::vector<Clause> clauseList;
-    std::queue<int> propagationQueue; // THIS KEEPS ON GETTING UPDATED ONCE A DECISION HAS BEEN MADE, until its empty unit prop goes on.
+    std::queue<int> unitQueue; // THIS KEEPS ON GETTING UPDATED ONCE A DECISION HAS BEEN MADE, until its empty unit prop goes on.
 
     Formula(int vars, int clauses):numVars(vars), numClauses(clauses){}
 

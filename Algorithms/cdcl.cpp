@@ -9,6 +9,10 @@ bool cdcl(Formula formula)
     int decisionLevel = 0;
     bool success=true;
 
+    //function to trivially find unit clauses and put them in the queue
+    // if no units then no conflict and decision made
+
+    bool firstSet = false;
 
     while(formula.decisionTrail.size()!=formula.numVars)
     {
@@ -22,8 +26,16 @@ bool cdcl(Formula formula)
             }
             else
             {
-                decisionLevel++;
-                formula.makeDecision(decisionLevel); // SELECT A VAR AND PUT IT INTO THE UNIT PROPAGATE QUEUE
+                if(!firstSet and formula.unitQueue.empty())
+                {
+                    firstSet= true;
+                    formula.makeDecision(decisionLevel); //NO INCREMENT IF NO UNITS FOUND ON FIRST TRY
+                }
+                else
+                {
+                    decisionLevel++;
+                    formula.makeDecision(decisionLevel); // SELECT A VAR AND PUT IT INTO THE UNIT PROPAGATE QUEUE}
+                }
             }
         }
         else
@@ -40,4 +52,6 @@ bool cdcl(Formula formula)
             }
         }
     }
+
+    return success;
 }
